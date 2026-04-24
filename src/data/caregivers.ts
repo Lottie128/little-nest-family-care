@@ -1,0 +1,135 @@
+export interface Caregiver {
+  id: string
+  name: string
+  photo: string
+  role: string
+  experience: number
+  rate: number
+  rating: number
+  reviewCount: number
+  location: string
+  tags: string[]
+  bio: string
+  languages: string[]
+  availability: string[]
+}
+
+export const caregivers: Caregiver[] = [
+  {
+    id: '1',
+    name: 'Sophie Müller',
+    photo: 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=400&h=400&fit=crop&crop=face',
+    role: 'Nanny & Childcare Specialist',
+    experience: 7,
+    rate: 28,
+    rating: 4.9,
+    reviewCount: 43,
+    location: 'Zurich',
+    tags: ['CPR Certified', 'Multilingual', 'Newborn Care', 'School Pickup'],
+    bio: 'I am a dedicated childcare professional with 7 years of experience working with families across Zurich. I hold a diploma in early childhood education and am passionate about creating safe, nurturing environments where children can thrive. I speak German, English, and French fluently.',
+    languages: ['German', 'English', 'French'],
+    availability: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
+  },
+  {
+    id: '2',
+    name: 'Laura Bernasconi',
+    photo: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face',
+    role: 'Babysitter & Au Pair',
+    experience: 4,
+    rate: 22,
+    rating: 4.8,
+    reviewCount: 29,
+    location: 'Geneva',
+    tags: ['English Native', 'Arts & Crafts', 'Homework Help', 'Pet Friendly'],
+    bio: 'Originally from London, I have been living in Geneva for 4 years. I love working with children of all ages and believe in combining fun and learning. I am available for after-school care, date nights, and weekend jobs.',
+    languages: ['English', 'French', 'Italian'],
+    availability: ['Mon', 'Wed', 'Fri', 'Sat', 'Sun'],
+  },
+  {
+    id: '3',
+    name: 'Anna Keller',
+    photo: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop&crop=face',
+    role: 'Nanny & Educator',
+    experience: 10,
+    rate: 35,
+    rating: 5.0,
+    reviewCount: 68,
+    location: 'Basel',
+    tags: ['Early Education', 'Montessori', 'Special Needs', 'Overnight Care'],
+    bio: "With over 10 years of experience and a degree in early childhood education, I specialize in Montessori-inspired care. I have worked with children with special needs and am trained in first aid. I am deeply committed to every child's unique development journey.",
+    languages: ['German', 'English'],
+    availability: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+  },
+  {
+    id: '4',
+    name: 'Clara Dubois',
+    photo: 'https://images.unsplash.com/photo-1554151228-14d9def656e4?w=400&h=400&fit=crop&crop=face',
+    role: 'Babysitter',
+    experience: 3,
+    rate: 18,
+    rating: 4.7,
+    reviewCount: 15,
+    location: 'Lausanne',
+    tags: ['Student', 'Music & Piano', 'Bilingual', 'Weekend Available'],
+    bio: 'I am a university student studying education in Lausanne. I grew up in a large family and love children. I am available mostly on weekends and evenings, and I bring energy, creativity, and genuine care to every family I work with.',
+    languages: ['French', 'English'],
+    availability: ['Thu', 'Fri', 'Sat', 'Sun'],
+  },
+  {
+    id: '5',
+    name: 'Maria Santos',
+    photo: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=400&fit=crop&crop=face',
+    role: 'Nanny & Cook',
+    experience: 6,
+    rate: 26,
+    rating: 4.9,
+    reviewCount: 37,
+    location: 'Zurich',
+    tags: ['Cooking & Nutrition', 'Multilingual', 'CPR Certified', 'Full Time'],
+    bio: 'I bring warmth, structure, and joy into every home I work in. Beyond childcare, I prepare healthy, balanced meals and support routines that help children flourish. I have worked with families in Portugal, Spain, and Switzerland over the last 6 years.',
+    languages: ['Portuguese', 'Spanish', 'English', 'German'],
+    availability: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
+  },
+  {
+    id: '6',
+    name: 'Lena Fischer',
+    photo: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop&crop=face',
+    role: 'Babysitter & Tutor',
+    experience: 5,
+    rate: 24,
+    rating: 4.8,
+    reviewCount: 22,
+    location: 'Bern',
+    tags: ['Academic Support', 'STEM', 'After School', 'Homework Help'],
+    bio: 'I am a teacher by training and a babysitter by passion. I specialize in combining afterschool care with academic support — from primary school maths to secondary school sciences. Families love my structured yet playful approach.',
+    languages: ['German', 'English', 'French'],
+    availability: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
+  },
+]
+
+export const testimonials = [
+  {
+    id: '1',
+    name: 'Isabelle M.',
+    location: 'Zurich',
+    text: 'Found an amazing babysitter for our two kids within 24 hours. The profiles are detailed and the verification gave us so much confidence. We finally have a trusted caregiver we can rely on every week.',
+    rating: 5,
+    photo: 'https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=100&h=100&fit=crop&crop=face',
+  },
+  {
+    id: '2',
+    name: 'Thomas & Nina K.',
+    location: 'Geneva',
+    text: 'We were nervous about finding someone trustworthy for our newborn. Little Nest made it so easy — background checks, reviews from real families, and a messaging system that kept everything organised.',
+    rating: 5,
+    photo: 'https://images.unsplash.com/photo-1521119989659-a83eee488004?w=100&h=100&fit=crop&crop=face',
+  },
+  {
+    id: '3',
+    name: 'Camille D.',
+    location: 'Lausanne',
+    text: 'As a single mum, I needed someone I could trust completely. The platform is very safe and easy to use. Very safe and easy to use. My daughter adores her nanny — it feels like she is part of the family.',
+    rating: 5,
+    photo: 'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=100&h=100&fit=crop&crop=face',
+  },
+]
