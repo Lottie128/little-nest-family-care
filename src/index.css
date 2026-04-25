@@ -3,26 +3,24 @@
 @theme {
   --color-cream: #FAF7F2;
   --color-beige: #F5EFE6;
-  --color-green-soft: #B5D5C5;
-  --color-green-mid: #7BAE9E;
-  --color-green-dark: #4A8C7A;
-  --color-accent: #E8A87C;
-  --color-border: #E8E0D6;
-  --color-text-dark: #2D2D2D;
-  --color-text-mid: #5A5A5A;
-  --color-text-light: #8A8A8A;
-}
-
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+  --color-sage: #B5D5C5;
+  --color-primary: #7BAE9E;
+  --color-primary-dark: #4A8C7A;
+  --color-amber: #E8A87C;
+  --color-border-soft: #E8E0D6;
+  --color-ink: #2D2D2D;
+  --color-sub: #5A5A5A;
+  --color-muted: #8A8A8A;
+  --color-panel: #404040;
+  --color-sage-light: #E8F0EC;
+  --color-gold: #C9A84C;
+  --color-gold-light: #F5EDD0;
 }
 
 body {
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  background-color: #FAF7F2;
-  color: #2D2D2D;
+  background-color: var(--color-cream);
+  color: var(--color-ink);
   -webkit-font-smoothing: antialiased;
 }
 
@@ -38,4 +36,3 @@ body {
 .animate-delay-100 { animation-delay: 0.1s; }
 .animate-delay-200 { animation-delay: 0.2s; }
 .animate-delay-300 { animation-delay: 0.3s; }
-.animate-delay-400 { animation-delay: 0.4s; }

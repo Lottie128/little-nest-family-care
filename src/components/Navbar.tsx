@@ -7,22 +7,30 @@ export default function Navbar() {
   const { pathname } = useLocation()
 
   const links = [
+    { to: '/#services', label: 'Our Services' },
     { to: '/caregivers', label: 'Find Caregivers' },
-    { to: '/post-job', label: 'Post a Job' },
     { to: '/how-it-works', label: 'How It Works' },
     { to: '/premium', label: 'Pricing' },
   ]
 
+  const isActive = (to: string) => {
+    if (to.startsWith('/#')) return pathname === '/'
+    return pathname === to
+  }
+
   return (
-    <nav className="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-[#E8E0D6]">
+    <nav className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-border-soft">
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between h-16">
-        <Link to="/" className="flex items-center gap-2 group">
-          <div className="w-8 h-8 rounded-full bg-[#7BAE9E] flex items-center justify-center">
-            <Baby size={16} className="text-white" />
+        <Link to="/" className="flex items-center gap-2.5">
+          <div className="w-9 h-9 rounded-full bg-primary flex items-center justify-center shadow-sm">
+            <Baby size={17} className="text-white" />
           </div>
-          <span className="font-semibold text-[#2D2D2D] text-lg tracking-tight">
-            Little Nest <span className="text-[#7BAE9E]">Family Care</span>
-          </span>
+          <div className="leading-tight">
+            <span className="font-bold text-ink text-base tracking-tight block">
+              Little Nest <span className="text-primary">Family Care</span>
+            </span>
+            <span className="text-[10px] text-muted tracking-widest uppercase block -mt-0.5">Swiss Settlement Concierge</span>
+          </div>
         </Link>
 
         <div className="hidden md:flex items-center gap-8">
@@ -31,9 +39,7 @@ export default function Navbar() {
               key={l.to}
               to={l.to}
               className={`text-sm font-medium transition-colors ${
-                pathname === l.to
-                  ? 'text-[#4A8C7A]'
-                  : 'text-[#5A5A5A] hover:text-[#2D2D2D]'
+                isActive(l.to) ? 'text-primary-dark' : 'text-sub hover:text-ink'
               }`}
             >
               {l.label}
@@ -44,44 +50,45 @@ export default function Navbar() {
         <div className="hidden md:flex items-center gap-3">
           <Link
             to="/messages"
-            className="text-sm font-medium text-[#5A5A5A] hover:text-[#2D2D2D] transition-colors"
+            className="text-sm font-medium text-sub hover:text-ink transition-colors"
           >
             Sign In
           </Link>
           <Link
-            to="/caregivers"
-            className="text-sm font-medium bg-[#7BAE9E] hover:bg-[#4A8C7A] text-white px-4 py-2 rounded-full transition-colors"
+            to="/post-job"
+            className="text-sm font-medium bg-primary hover:bg-primary-dark text-white px-5 py-2 rounded-full transition-colors shadow-sm"
           >
-            Get Started
+            Book Consultation
           </Link>
         </div>
 
         <button
-          className="md:hidden p-2 text-[#5A5A5A]"
+          className="md:hidden p-2 text-sub"
           onClick={() => setOpen(o => !o)}
+          aria-label="Toggle menu"
         >
           {open ? <X size={22} /> : <Menu size={22} />}
         </button>
       </div>
 
       {open && (
-        <div className="md:hidden bg-white border-t border-[#E8E0D6] px-6 py-4 flex flex-col gap-4">
+        <div className="md:hidden bg-white border-t border-border-soft px-6 py-4 flex flex-col gap-4">
           {links.map(l => (
             <Link
               key={l.to}
               to={l.to}
-              className="text-sm font-medium text-[#5A5A5A]"
+              className="text-sm font-medium text-sub"
               onClick={() => setOpen(false)}
             >
               {l.label}
             </Link>
           ))}
           <Link
-            to="/caregivers"
-            className="text-sm font-medium bg-[#7BAE9E] text-white px-4 py-2 rounded-full text-center"
+            to="/post-job"
+            className="text-sm font-medium bg-primary text-white px-4 py-2.5 rounded-full text-center"
             onClick={() => setOpen(false)}
           >
-            Get Started
+            Book Consultation
           </Link>
         </div>
       )}

@@ -1,237 +1,328 @@
-import { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import { Search, Shield, Star, Clock, CheckCircle, ArrowRight, ChevronRight } from 'lucide-react'
-import { caregivers, testimonials } from '../data/caregivers'
+import { Link } from 'react-router-dom'
+import {
+  Shield, Star, CheckCircle, ArrowRight, ChevronRight,
+  Home as HomeIcon, BookOpen, Baby, Heart, FileText, Users,
+  MapPin, Sparkles,
+} from 'lucide-react'
+import { testimonials } from '../data/caregivers'
 import CaregiverCard from '../components/CaregiverCard'
+import { caregivers } from '../data/caregivers'
+
+const services = [
+  {
+    icon: HomeIcon,
+    title: 'Premium Housing',
+    desc: 'Curated luxury rentals and property search across Zurich, Geneva, Basel and beyond — matched to your lifestyle.',
+    color: 'bg-sage-light',
+    iconColor: 'text-primary-dark',
+  },
+  {
+    icon: BookOpen,
+    title: 'International Schools',
+    desc: 'Expert placement in top English, French, and bilingual schools. We navigate applications so your children start strong.',
+    color: 'bg-gold-light',
+    iconColor: 'text-gold',
+  },
+  {
+    icon: Baby,
+    title: 'Childcare & Nannies',
+    desc: 'Vetted, multilingual nannies and babysitters who understand your culture and care for your children like family.',
+    color: 'bg-beige',
+    iconColor: 'text-amber',
+  },
+  {
+    icon: Heart,
+    title: 'Healthcare Navigation',
+    desc: 'Access to top private doctors, specialists, and family clinics — with guidance in your language.',
+    color: 'bg-sage-light',
+    iconColor: 'text-primary',
+  },
+  {
+    icon: FileText,
+    title: 'Admin & Legal Support',
+    desc: 'Residence permits, Swiss bank accounts, insurance, and contracts — handled precisely so nothing falls through the cracks.',
+    color: 'bg-gold-light',
+    iconColor: 'text-gold',
+  },
+  {
+    icon: Users,
+    title: 'Community & Lifestyle',
+    desc: 'Connect with vibrant expat networks, cultural clubs, and social events. Switzerland becomes home faster together.',
+    color: 'bg-beige',
+    iconColor: 'text-primary-dark',
+  },
+]
 
 export default function Home() {
-  const [query, setQuery] = useState('')
-  const navigate = useNavigate()
-
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault()
-    navigate(`/caregivers?q=${query}`)
-  }
-
   return (
     <div>
-      {/* Hero */}
-      <section className="relative bg-gradient-to-br from-[#F5EFE6] via-[#FAF7F2] to-[#E8F0EC] overflow-hidden">
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-20 right-10 w-72 h-72 rounded-full bg-[#B5D5C5]/20 blur-3xl" />
-          <div className="absolute bottom-10 left-10 w-64 h-64 rounded-full bg-[#E8A87C]/10 blur-3xl" />
-        </div>
 
-        <div className="max-w-7xl mx-auto px-6 py-24 md:py-32 relative">
-          <div className="max-w-2xl animate-fade-in-up">
-            <div className="inline-flex items-center gap-2 bg-white border border-[#E8E0D6] rounded-full px-4 py-1.5 text-sm text-[#7BAE9E] font-medium mb-6 shadow-sm">
-              <span className="w-2 h-2 rounded-full bg-[#7BAE9E] animate-pulse" />
-              Caregivers available near you now
+      {/* ── Hero ── */}
+      <section className="relative bg-beige overflow-hidden">
+        <div className="absolute top-0 right-0 w-[700px] h-[700px] rounded-full bg-sage opacity-20 translate-x-1/3 -translate-y-1/4 pointer-events-none" />
+        <div className="absolute bottom-0 left-0 w-96 h-96 rounded-full bg-amber opacity-10 -translate-x-1/3 translate-y-1/3 pointer-events-none" />
+
+        <div className="max-w-7xl mx-auto px-6 py-28 md:py-36 relative">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+
+            {/* Left: copy */}
+            <div>
+              <span className="inline-flex items-center gap-2 bg-white shadow-sm border border-gold/30 rounded-full px-4 py-1.5 text-sm text-gold font-semibold mb-8">
+                <Sparkles size={13} className="text-gold" />
+                Switzerland's Premier Family Concierge
+              </span>
+
+              <h1 className="text-5xl md:text-[3.5rem] font-extrabold text-ink leading-[1.08] tracking-tight mb-6">
+                Your Swiss Chapter,{' '}
+                <span className="text-primary">Guided With Care</span>
+              </h1>
+
+              <p className="text-lg text-sub leading-relaxed mb-10 max-w-lg">
+                We connect high-net families relocating to Switzerland with premium housing, trusted childcare,
+                international schools, and everything in between — in one seamless service.
+              </p>
+
+              <div className="flex flex-col sm:flex-row gap-3 mb-10">
+                <Link
+                  to="/post-job"
+                  className="inline-flex items-center justify-center gap-2 bg-primary hover:bg-primary-dark text-white font-semibold px-7 py-4 rounded-2xl transition-colors shadow-md text-sm"
+                >
+                  Book a Free Consultation <ArrowRight size={16} />
+                </Link>
+                <Link
+                  to="/#services"
+                  className="inline-flex items-center justify-center gap-2 bg-white border-2 border-sage text-ink font-semibold px-7 py-4 rounded-2xl hover:border-primary transition-colors text-sm"
+                >
+                  Explore Our Services
+                </Link>
+              </div>
+
+              <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-sub">
+                {[
+                  'Trusted by 500+ families',
+                  '6 full-service categories',
+                  'Across 5+ Swiss cities',
+                ].map(t => (
+                  <span key={t} className="flex items-center gap-1.5">
+                    <CheckCircle size={13} className="text-primary" /> {t}
+                  </span>
+                ))}
+              </div>
             </div>
 
-            <h1 className="text-5xl md:text-6xl font-bold text-[#2D2D2D] leading-tight mb-5">
-              Find Trusted Childcare,{' '}
-              <span className="text-[#7BAE9E]">Right When You Need It</span>
-            </h1>
-            <p className="text-lg text-[#5A5A5A] leading-relaxed mb-10">
-              Connecting families with reliable, loving caregivers in your area.
-              Verified profiles, real reviews, and secure messaging — all in one place.
-            </p>
-
-            <form onSubmit={handleSearch} className="flex flex-col sm:flex-row gap-3 max-w-lg">
-              <div className="flex-1 relative">
-                <Search size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-[#8A8A8A]" />
-                <input
-                  type="text"
-                  placeholder="Enter your city or postcode..."
-                  value={query}
-                  onChange={e => setQuery(e.target.value)}
-                  className="w-full pl-11 pr-4 py-3.5 rounded-xl border border-[#E8E0D6] bg-white text-[#2D2D2D] placeholder-[#8A8A8A] focus:outline-none focus:ring-2 focus:ring-[#7BAE9E]/50 shadow-sm"
+            {/* Right: image card */}
+            <div className="hidden lg:block relative">
+              <div className="relative rounded-3xl overflow-hidden shadow-2xl">
+                <img
+                  src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=600&h=680&fit=crop&crop=center"
+                  alt="Premium family home"
+                  className="w-full h-[480px] object-cover"
                 />
-              </div>
-              <button
-                type="submit"
-                className="bg-[#7BAE9E] hover:bg-[#4A8C7A] text-white font-medium px-6 py-3.5 rounded-xl transition-colors whitespace-nowrap shadow-sm"
-              >
-                Find a Caregiver
-              </button>
-            </form>
+                <div className="absolute inset-0 bg-gradient-to-t from-ink/60 via-transparent to-transparent" />
 
-            <div className="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-sm text-[#5A5A5A]">
-              <Link to="/caregivers" className="flex items-center gap-1.5 hover:text-[#7BAE9E] transition-colors">
-                <ChevronRight size={14} className="text-[#7BAE9E]" />
-                Browse all caregivers
-              </Link>
-              <Link to="/post-job" className="flex items-center gap-1.5 hover:text-[#7BAE9E] transition-colors">
-                <ChevronRight size={14} className="text-[#7BAE9E]" />
-                Post a job for free
-              </Link>
-              <Link to="/caregivers" className="flex items-center gap-1.5 hover:text-[#7BAE9E] transition-colors">
-                <ChevronRight size={14} className="text-[#7BAE9E]" />
-                Become a caregiver
-              </Link>
+                {/* Floating stat card */}
+                <div className="absolute bottom-6 left-6 right-6 bg-white/95 backdrop-blur-md rounded-2xl p-4 shadow-xl">
+                  <div className="grid grid-cols-3 gap-4">
+                    {[
+                      { n: '500+', l: 'Families Settled' },
+                      { n: '4.9★', l: 'Average Rating' },
+                      { n: '6', l: 'Service Areas' },
+                    ].map(({ n, l }) => (
+                      <div key={l} className="text-center">
+                        <p className="text-xl font-bold text-primary">{n}</p>
+                        <p className="text-xs text-muted leading-tight">{l}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Floating badge top-right */}
+              <div className="absolute -top-4 -right-4 bg-gold text-white text-xs font-bold px-4 py-2 rounded-full shadow-lg">
+                🇨🇭 Swiss Verified
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Trust Badges */}
-      <section className="bg-white border-y border-[#E8E0D6]">
-        <div className="max-w-7xl mx-auto px-6 py-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {[
-              { icon: Shield, label: 'Verified Caregivers', sub: 'ID & background checked' },
-              { icon: Star, label: 'Rated by Real Families', sub: 'Honest, moderated reviews' },
-              { icon: CheckCircle, label: 'Background Checked', sub: 'Swiss federal registry' },
-              { icon: Clock, label: 'Secure Messaging', sub: 'Encrypted & private' },
-            ].map(({ icon: Icon, label, sub }) => (
-              <div key={label} className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-[#F5EFE6] flex items-center justify-center shrink-0">
-                  <Icon size={18} className="text-[#7BAE9E]" />
-                </div>
-                <div>
-                  <p className="text-sm font-semibold text-[#2D2D2D]">{label}</p>
-                  <p className="text-xs text-[#8A8A8A]">{sub}</p>
-                </div>
-              </div>
-            ))}
-          </div>
+      {/* ── Origin tag bar ── */}
+      <section className="bg-ink py-4 overflow-hidden">
+        <div className="max-w-7xl mx-auto px-6 flex items-center justify-center gap-3 flex-wrap">
+          <span className="text-xs text-gray-400 uppercase tracking-widest font-medium">Serving families from</span>
+          {['🇳🇬 Nigeria', '🇰🇪 Kenya', '🇬🇭 Ghana', '🇿🇦 South Africa', '🇨🇲 Cameroon', '🇨🇮 Côte d\'Ivoire', '🇸🇳 Senegal', '& more'].map(c => (
+            <span key={c} className="text-xs text-gray-300 bg-panel px-3 py-1 rounded-full">{c}</span>
+          ))}
         </div>
       </section>
 
-      {/* How It Works */}
-      <section className="max-w-7xl mx-auto px-6 py-20">
+      {/* ── Services ── */}
+      <section id="services" className="max-w-7xl mx-auto px-6 py-24">
         <div className="text-center mb-14">
-          <p className="text-[#7BAE9E] font-semibold text-sm uppercase tracking-widest mb-2">Simple Process</p>
-          <h2 className="text-4xl font-bold text-[#2D2D2D] mb-4">How It Works</h2>
-          <p className="text-[#5A5A5A] max-w-md mx-auto">
-            Finding the right caregiver is easy. Three simple steps and you're set.
+          <p className="text-primary font-semibold text-sm uppercase tracking-widest mb-2">What We Do</p>
+          <h2 className="text-4xl font-bold text-ink mb-4">Everything You Need to Settle Into Swiss Life</h2>
+          <p className="text-sub max-w-lg mx-auto leading-relaxed">
+            From your first apartment to your children's school — we handle every detail so you can focus on your family.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
-          <div className="hidden md:block absolute top-12 left-1/4 right-1/4 h-px border-t-2 border-dashed border-[#B5D5C5]" />
-
-          {[
-            {
-              step: '01',
-              title: 'Post your needs',
-              desc: 'Tell us what type of care you need, your location, schedule, and budget. Takes 2 minutes.',
-            },
-            {
-              step: '02',
-              title: 'Get matched instantly',
-              desc: 'Browse verified caregiver profiles matched to your criteria. View ratings, experience, and reviews.',
-            },
-            {
-              step: '03',
-              title: 'Hire with confidence',
-              desc: 'Message caregivers securely, arrange interviews, and hire. Payment is protected until the job is done.',
-            },
-          ].map(({ step, title, desc }, i) => (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {services.map(({ icon: Icon, title, desc, color, iconColor }, i) => (
             <div
-              key={step}
-              className="text-center p-8 bg-white rounded-2xl border border-[#E8E0D6] animate-fade-in-up"
-              style={{ animationDelay: `${i * 120}ms` }}
+              key={title}
+              className="group bg-white rounded-2xl border border-sage/30 p-7 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 animate-fade-in-up flex flex-col"
+              style={{ animationDelay: `${i * 80}ms` }}
             >
-              <div className="w-14 h-14 rounded-full bg-[#7BAE9E] text-white font-bold text-xl flex items-center justify-center mx-auto mb-5">
-                {step}
+              <div className={`w-12 h-12 rounded-xl ${color} flex items-center justify-center mb-5`}>
+                <Icon size={22} className={iconColor} />
               </div>
-              <h3 className="text-xl font-semibold text-[#2D2D2D] mb-3">{title}</h3>
-              <p className="text-[#5A5A5A] text-sm leading-relaxed">{desc}</p>
+              <h3 className="text-base font-bold text-ink mb-2">{title}</h3>
+              <p className="text-sm text-sub leading-relaxed flex-1">{desc}</p>
+              <Link
+                to="/premium"
+                className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-primary group-hover:gap-2 transition-all"
+              >
+                Learn more <ChevronRight size={14} />
+              </Link>
             </div>
           ))}
         </div>
       </section>
 
-      {/* Featured Caregivers */}
-      <section className="bg-[#F5EFE6] py-20">
+      {/* ── How It Works ── */}
+      <section className="bg-beige py-24">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="flex items-end justify-between mb-10">
-            <div>
-              <p className="text-[#7BAE9E] font-semibold text-sm uppercase tracking-widest mb-2">Top Caregivers</p>
-              <h2 className="text-4xl font-bold text-[#2D2D2D]">Meet Our Caregivers</h2>
-            </div>
-            <Link
-              to="/caregivers"
-              className="hidden md:flex items-center gap-2 text-[#7BAE9E] font-medium hover:gap-3 transition-all text-sm"
-            >
-              View all caregivers <ArrowRight size={16} />
-            </Link>
+          <div className="text-center mb-14">
+            <p className="text-primary font-semibold text-sm uppercase tracking-widest mb-2">Our Process</p>
+            <h2 className="text-4xl font-bold text-ink mb-4">White-Glove Service, Start to Finish</h2>
+            <p className="text-sub max-w-md mx-auto leading-relaxed">
+              Three steps to make Switzerland feel like home — guided by a dedicated advisor who understands your journey.
+            </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {caregivers.slice(0, 3).map((c, i) => (
-              <CaregiverCard key={c.id} caregiver={c} index={i} />
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {[
+              {
+                step: '01',
+                title: 'Share Your Vision',
+                desc: 'Tell us about your family, arrival city, timeline, and priorities. A 15-minute call is all it takes to get started.',
+              },
+              {
+                step: '02',
+                title: 'Meet Your Concierge',
+                desc: 'We assign a dedicated advisor who speaks your language — culturally and literally — and knows Switzerland inside out.',
+              },
+              {
+                step: '03',
+                title: 'Settle With Confidence',
+                desc: 'Your advisor handles every introduction, booking, and follow-up. You arrive and feel at home from day one.',
+              },
+            ].map(({ step, title, desc }, i) => (
+              <div
+                key={step}
+                className="relative p-8 bg-white rounded-2xl border border-sage/30 shadow-sm hover:shadow-md transition-shadow animate-fade-in-up"
+                style={{ animationDelay: `${i * 120}ms` }}
+              >
+                <div className="w-14 h-14 rounded-2xl bg-primary text-white font-extrabold text-xl flex items-center justify-center mb-5 shadow-md">
+                  {step}
+                </div>
+                <h3 className="text-lg font-bold text-ink mb-3">{title}</h3>
+                <p className="text-sub text-sm leading-relaxed">{desc}</p>
+              </div>
             ))}
           </div>
 
-          <div className="mt-8 text-center md:hidden">
+          <div className="text-center mt-12">
             <Link
-              to="/caregivers"
-              className="inline-flex items-center gap-2 text-[#7BAE9E] font-medium text-sm"
+              to="/post-job"
+              className="inline-flex items-center gap-2 bg-primary hover:bg-primary-dark text-white font-semibold px-8 py-4 rounded-2xl transition-colors shadow-md text-sm"
             >
-              View all caregivers <ArrowRight size={16} />
+              Book Your Free Consultation <ArrowRight size={16} />
             </Link>
           </div>
         </div>
       </section>
 
-      {/* Testimonials */}
-      <section className="max-w-7xl mx-auto px-6 py-20">
-        <div className="text-center mb-14">
-          <p className="text-[#7BAE9E] font-semibold text-sm uppercase tracking-widest mb-2">Real Families</p>
-          <h2 className="text-4xl font-bold text-[#2D2D2D] mb-4">What Families Say</h2>
+      {/* ── Featured Caregivers ── */}
+      <section className="max-w-7xl mx-auto px-6 py-24">
+        <div className="flex items-end justify-between mb-12">
+          <div>
+            <p className="text-primary font-semibold text-sm uppercase tracking-widest mb-2">Childcare Service</p>
+            <h2 className="text-4xl font-bold text-ink">Meet Our Caregivers</h2>
+            <p className="text-sub mt-2 max-w-md">Multilingual, vetted professionals who feel like part of the family.</p>
+          </div>
+          <Link to="/caregivers" className="hidden md:flex items-center gap-2 text-primary font-semibold text-sm hover:gap-3 transition-all">
+            View all caregivers <ArrowRight size={16} />
+          </Link>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {testimonials.map((t, i) => (
-            <div
-              key={t.id}
-              className="bg-white rounded-2xl p-7 border border-[#E8E0D6] animate-fade-in-up"
-              style={{ animationDelay: `${i * 100}ms` }}
-            >
-              <div className="flex gap-1 mb-4">
-                {Array.from({ length: t.rating }).map((_, j) => (
-                  <Star key={j} size={14} className="text-[#E8A87C] fill-[#E8A87C]" />
-                ))}
-              </div>
-              <p className="text-[#5A5A5A] text-sm leading-relaxed mb-5">"{t.text}"</p>
-              <div className="flex items-center gap-3">
-                <img src={t.photo} alt={t.name} className="w-10 h-10 rounded-full object-cover" />
-                <div>
-                  <p className="text-sm font-semibold text-[#2D2D2D]">{t.name}</p>
-                  <p className="text-xs text-[#8A8A8A]">{t.location}</p>
-                </div>
-              </div>
-            </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {caregivers.slice(0, 3).map((c, i) => (
+            <CaregiverCard key={c.id} caregiver={c} index={i} />
           ))}
         </div>
       </section>
 
-      {/* Safety Section */}
-      <section className="bg-[#2D2D2D] text-white py-20">
+      {/* ── Testimonials ── */}
+      <section className="bg-beige py-24">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-14">
+            <p className="text-primary font-semibold text-sm uppercase tracking-widest mb-2">Family Stories</p>
+            <h2 className="text-4xl font-bold text-ink">What Families Say</h2>
+            <p className="text-sub mt-3 max-w-md mx-auto">From Lagos to Zurich, Cape Town to Geneva — real stories from families we've guided home.</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {testimonials.map((t, i) => (
+              <div
+                key={t.id}
+                className="bg-white rounded-2xl p-8 border border-sage/30 shadow-sm animate-fade-in-up flex flex-col"
+                style={{ animationDelay: `${i * 100}ms` }}
+              >
+                <div className="flex gap-1 mb-5">
+                  {Array.from({ length: t.rating }).map((_, j) => (
+                    <Star key={j} size={14} className="text-amber fill-amber" />
+                  ))}
+                </div>
+                <p className="text-sub leading-relaxed mb-6 text-sm flex-1">"{t.text}"</p>
+                <div className="flex items-center gap-3">
+                  <img src={t.photo} alt={t.name} className="w-11 h-11 rounded-full object-cover ring-2 ring-sage" />
+                  <div>
+                    <p className="text-sm font-bold text-ink">{t.name}</p>
+                    <p className="text-xs text-primary font-medium">{t.location}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Trust / Stats ── */}
+      <section className="bg-ink py-24">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
             <div>
-              <p className="text-[#7BAE9E] font-semibold text-sm uppercase tracking-widest mb-3">Your Family's Safety</p>
-              <h2 className="text-4xl font-bold mb-6">Safety Is Our Priority</h2>
-              <p className="text-[#9CA3AF] leading-relaxed mb-8">
-                Every caregiver on Little Nest goes through a thorough vetting process. We believe trust is earned — and we do the work so you don't have to.
+              <p className="text-primary font-semibold text-sm uppercase tracking-widest mb-3">Why Families Choose Us</p>
+              <h2 className="text-4xl font-bold text-white mb-6">We Understand Your Journey</h2>
+              <p className="text-gray-400 leading-relaxed mb-8 max-w-md">
+                Relocating your family to a new country is one of the most significant decisions you'll make.
+                We've built Little Nest specifically for high-net families from Africa and beyond — understanding the cultural nuances,
+                the priorities, and the high standards you expect.
               </p>
               <div className="space-y-5">
                 {[
-                  { title: 'Identity Verification', desc: 'Government-issued ID verified before approval' },
-                  { title: 'Background Checks', desc: 'Swiss criminal registry + reference screening' },
-                  { title: 'Community Reviews', desc: 'Only verified families can leave reviews' },
+                  { title: 'Culturally Aware', desc: 'Advisors who understand your background, values, and expectations' },
+                  { title: 'Fully Vetted Network', desc: 'Every provider — from nannies to landlords — is carefully screened' },
+                  { title: 'One Point of Contact', desc: "Your dedicated concierge handles everything so you don't have to" },
                 ].map(item => (
                   <div key={item.title} className="flex items-start gap-4">
-                    <div className="w-8 h-8 rounded-full bg-[#7BAE9E]/20 flex items-center justify-center shrink-0 mt-0.5">
-                      <CheckCircle size={16} className="text-[#7BAE9E]" />
+                    <div className="w-8 h-8 rounded-lg bg-primary/20 flex items-center justify-center shrink-0 mt-0.5">
+                      <CheckCircle size={16} className="text-primary" />
                     </div>
                     <div>
                       <p className="font-semibold text-white text-sm">{item.title}</p>
-                      <p className="text-[#9CA3AF] text-sm">{item.desc}</p>
+                      <p className="text-gray-400 text-sm">{item.desc}</p>
                     </div>
                   </div>
                 ))}
@@ -240,17 +331,27 @@ export default function Home() {
 
             <div className="grid grid-cols-2 gap-4">
               {[
-                { number: '500+', label: 'Verified Caregivers' },
-                { number: '2,400+', label: 'Happy Families' },
-                { number: '4.9★', label: 'Average Rating' },
-                { number: '100%', label: 'Background Checked' },
+                { number: '500+', label: 'Families Settled' },
+                { number: '20+', label: 'Countries Served' },
+                { number: '4.9★', label: 'Client Satisfaction' },
+                { number: '6', label: 'Service Categories' },
               ].map(stat => (
-                <div
-                  key={stat.label}
-                  className="bg-[#404040] rounded-2xl p-6 text-center"
-                >
-                  <p className="text-4xl font-bold text-[#7BAE9E] mb-2">{stat.number}</p>
-                  <p className="text-[#9CA3AF] text-sm">{stat.label}</p>
+                <div key={stat.label} className="bg-panel rounded-2xl p-6 text-center border border-white/5">
+                  <p className="text-3xl font-bold text-primary mb-2">{stat.number}</p>
+                  <p className="text-gray-400 text-sm">{stat.label}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* City badges */}
+          <div className="mt-16 pt-12 border-t border-panel">
+            <div className="flex flex-wrap items-center justify-center gap-4">
+              <span className="text-sm text-gray-400 mr-2">Currently serving:</span>
+              {['Zurich', 'Geneva', 'Basel', 'Bern', 'Lausanne', 'Lugano'].map(city => (
+                <div key={city} className="flex items-center gap-1.5 bg-panel px-4 py-2 rounded-full border border-white/5">
+                  <MapPin size={12} className="text-primary" />
+                  <span className="text-xs text-gray-300 font-medium">{city}</span>
                 </div>
               ))}
             </div>
@@ -258,27 +359,31 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CTA Banner */}
-      <section className="bg-gradient-to-r from-[#7BAE9E] to-[#4A8C7A] py-16">
+      {/* ── CTA Banner ── */}
+      <section className="bg-gradient-to-r from-primary to-primary-dark py-20">
         <div className="max-w-7xl mx-auto px-6 text-center">
+          <div className="inline-flex items-center gap-2 bg-white/15 border border-white/30 rounded-full px-4 py-1.5 text-white text-xs font-semibold mb-6">
+            <Shield size={12} /> Free, no-obligation consultation
+          </div>
           <h2 className="text-4xl font-bold text-white mb-4">
-            Ready to Find Your Perfect Caregiver?
+            Ready to Begin Your Swiss Journey?
           </h2>
-          <p className="text-white/80 mb-8 max-w-lg mx-auto">
-            Start your search today — caregivers are available near you now.
+          <p className="text-white/80 mb-10 max-w-lg mx-auto leading-relaxed">
+            Book a free 20-minute call with one of our family concierges today. We'll map out your arrival,
+            understand your needs, and show you exactly how we can help.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
-              to="/caregivers"
-              className="bg-white text-[#4A8C7A] font-semibold px-8 py-3.5 rounded-full hover:bg-[#FAF7F2] transition-colors"
+              to="/post-job"
+              className="bg-white text-primary-dark font-bold px-8 py-4 rounded-2xl hover:bg-cream transition-colors shadow-lg"
             >
-              Start your search today
+              Book Free Consultation
             </Link>
             <Link
-              to="/post-job"
-              className="bg-white/10 border border-white/30 text-white font-semibold px-8 py-3.5 rounded-full hover:bg-white/20 transition-colors"
+              to="/caregivers"
+              className="bg-white/15 border-2 border-white/40 text-white font-semibold px-8 py-4 rounded-2xl hover:bg-white/25 transition-colors"
             >
-              Join as a caregiver
+              Browse Caregivers
             </Link>
           </div>
         </div>
